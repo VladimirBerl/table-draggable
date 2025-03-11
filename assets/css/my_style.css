@@ -164,7 +164,7 @@ td {
 	vertical-align: middle;
 } */
 .custom_table {
-	display: block;
+	display: none;
 	padding: 50px;
 	width: 100%;
 	border-collapse: collapse;

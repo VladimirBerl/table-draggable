@@ -1,6 +1,163 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const tableId = "custom_table"; // ID таблицы
-  const storageKey = "tableData"; // Ключ для LocalStorage
+  const links = document.querySelectorAll(".submenu_child a");
+  const table = document.querySelector(".custom_table");
+  const zeroDataTable = [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ];
+  let storageKey; // Ключ для LocalStorage
+
+  links.forEach((link) => {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      table.style = "display: table;";
+      storageKey = link.getAttribute("data-table-btn");
+      loadTableData();
+    });
+  });
+
   const draggableCells = document.querySelectorAll("td[draggable='true']");
 
   let draggedCell = null;
@@ -19,11 +176,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedData = localStorage.getItem(storageKey);
     if (savedData) {
       const tableData = JSON.parse(savedData);
-      document.querySelectorAll("td[draggable='true']").forEach((cell, index) => {
-        if (tableData[index] !== undefined) {
-          cell.innerText = tableData[index];
-        }
-      });
+      document
+        .querySelectorAll("td[draggable='true']")
+        .forEach((cell, index) => {
+          if (tableData[index] !== undefined) {
+            cell.innerText = tableData[index];
+          }
+        });
+    } else {
+      localStorage.setItem(storageKey, JSON.stringify(zeroDataTable));
+      document
+        .querySelectorAll("td[draggable='true']")
+        .forEach((cell, index) => {
+          if (zeroDataTable[index] !== undefined) {
+            cell.innerText = zeroDataTable[index];
+          }
+        });
     }
   }
 
@@ -75,7 +243,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-
-  // Загружаем данные при загрузке страницы
-  loadTableData();
 });
